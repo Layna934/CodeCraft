@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>CodeCraftHub – Learning Management</title>
+<title>CodeCraftHub: Your Learning Management Platform</title>
 <style>
   :root {
     --primary: #8B5CF6;
@@ -233,11 +233,11 @@
   .btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
   /* Primary = purple (#8B5CF6) — used for Edit */
-  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary { background: #8B5CF6; color: #fff; }
   .btn-primary:hover:not(:disabled) { background: var(--primary-dark); }
 
   /* Success = amber (#F59E0B) — used for Add Course and Save Changes */
-  .btn-success { background: var(--success); color: #fff; }
+  .btn-success { background: #F59E0B; color: #fff; }
   .btn-success:hover:not(:disabled) { background: #D97706; }
 
   .btn-ghost {
@@ -257,7 +257,7 @@
   .btn-edit:hover:not(:disabled) { background: var(--primary-dark); }
 
   /* Delete button — red (#EF4444) */
-  .btn-delete { background: var(--danger); color: #fff; }
+  .btn-delete { background: #EF4444; color: #fff; }
   .btn-delete:hover:not(:disabled) { background: #DC2626; }
 
   .spinner {
@@ -693,7 +693,7 @@
         <td class="actions-cell">
           <button class="btn btn-icon btn-edit" onclick="openEditModal('${c.id}')" title="Edit">✏️ Edit</button>
           &nbsp;
-          <button class="btn btn-icon btn-delete" onclick="deleteCourse('${c.id}')" title="Delete">🗑 Remove</button>
+          <button class="btn btn-icon btn-delete" onclick="handleDelete('${c.id}')" title="Delete">🗑 Remove</button>
         </td>
       </tr>`;
   }
@@ -764,7 +764,7 @@
   }
 
   // ── Delete ─────────────────────────────────────────────
-  async function deleteCourse(id) {
+  async function handleDelete(id) {
     if (!confirm('Remove this course? This cannot be undone.')) return;
     const row = document.querySelector(`tr[data-id="${id}"]`);
     if (row) row.style.opacity = '0.4';
