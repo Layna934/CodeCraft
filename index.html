@@ -119,7 +119,7 @@
     animation: slideIn 0.22s ease;
     transition: opacity 0.3s;
   }
-  .toast.success { background: var(--success-light); color: #92400E; border-left: 4px solid var(--success); }
+  .toast.success { background: var(--success-light); color: #78350F; border-left: 4px solid var(--success); }
   .toast.error   { background: var(--danger-light);  color: #991B1B; border-left: 4px solid var(--danger); }
   @keyframes slideIn { from { transform: translateX(60px); opacity: 0; } to { transform: none; opacity: 1; } }
 
@@ -232,8 +232,13 @@
   .btn:active { transform: scale(0.97); }
   .btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
+  /* Primary = purple (#8B5CF6) — used for Edit */
   .btn-primary { background: var(--primary); color: #fff; }
   .btn-primary:hover:not(:disabled) { background: var(--primary-dark); }
+
+  /* Success = amber (#F59E0B) — used for Add Course and Save Changes */
+  .btn-success { background: var(--success); color: #fff; }
+  .btn-success:hover:not(:disabled) { background: #D97706; }
 
   .btn-ghost {
     background: var(--neutral-100);
@@ -243,23 +248,26 @@
   .btn-ghost:hover:not(:disabled) { background: var(--neutral-200); }
 
   .btn-icon {
-    padding: 6px 10px;
-    font-size: 0.8rem;
+    padding: 6px 12px;
+    font-size: 0.82rem;
   }
-  .btn-edit { background: var(--primary-light); color: var(--primary-dark); }
-  .btn-edit:hover:not(:disabled) { background: #DDD6FE; }
 
-  .btn-delete { background: var(--danger-light); color: #B91C1C; }
-  .btn-delete:hover:not(:disabled) { background: #FECACA; }
+  /* Edit button — purple */
+  .btn-edit { background: var(--primary); color: #fff; }
+  .btn-edit:hover:not(:disabled) { background: var(--primary-dark); }
 
-  /* ── Spinner ── */
+  /* Delete button — red (#EF4444) */
+  .btn-delete { background: var(--danger); color: #fff; }
+  .btn-delete:hover:not(:disabled) { background: #DC2626; }
+
   .spinner {
     width: 18px; height: 18px;
-    border: 2.5px solid rgba(255,255,255,0.3);
+    border: 2.5px solid rgba(255,255,255,0.35);
     border-top-color: #fff;
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
     display: inline-block;
+    vertical-align: middle;
   }
   .spinner.dark {
     border-color: rgba(139,92,246,0.2);
@@ -267,7 +275,35 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ── Course table ── */
+  .color-key {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 10px 20px;
+    background: var(--white);
+    border-bottom: 1px solid var(--neutral-200);
+  }
+  .color-key-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+  }
+  .key-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--neutral-600);
+  }
+  .key-swatch {
+    width: 26px; height: 18px;
+    border-radius: 4px;
+  }
   .course-count {
     background: var(--primary-light);
     color: var(--primary-dark);
@@ -417,6 +453,14 @@
   </div>
 </header>
 
+<div class="color-key">
+  <div class="color-key-inner">
+    <span class="key-item"><span class="key-swatch" style="background:#8B5CF6"></span> Primary — Edit</span>
+    <span class="key-item"><span class="key-swatch" style="background:#F59E0B"></span> Success — Add / Save</span>
+    <span class="key-item"><span class="key-swatch" style="background:#EF4444"></span> Delete — Remove</span>
+  </div>
+</div>
+
 <div id="toast-container"></div>
 
 <div class="page">
@@ -456,7 +500,7 @@
           </div>
         </div>
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary" id="add-btn">
+          <button type="submit" class="btn btn-success" id="add-btn">
             <span id="add-btn-icon">＋</span> Add Course
           </button>
           <button type="button" class="btn btn-ghost" onclick="resetAddForm()">Clear</button>
@@ -537,7 +581,7 @@
     </div>
     <div class="modal-footer">
       <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-primary" id="save-edit-btn" onclick="submitEdit()">
+      <button class="btn btn-success" id="save-edit-btn" onclick="submitEdit()">
         <span id="save-icon">💾</span> Save Changes
       </button>
     </div>
